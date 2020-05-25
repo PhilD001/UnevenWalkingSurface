@@ -1,6 +1,6 @@
-function export_data(pathInput, iflpfilter, exportBySubject)
+function pathOutput = export_data(pathInput, iflpfilter, exportBySubject)
 %
-% EXPORT_DATA(pathInput, iflpfilter, exportBySubjec) loads, preprocesses, and exports raw
+% EXPORT_DATA(pathInput, iflpfilter, exportBySubject) loads, preprocesses, and exports raw
 % data collected in study by Luo et al. "A database of human gait performance 
 % on irregular and uneven surfaces collected by wearable sensors". Under review
 %
@@ -14,10 +14,11 @@ function export_data(pathInput, iflpfilter, exportBySubject)
 %   If 'on', a separate mat file is created for each subject. 
 %   If 'off', a single mat file is created for all subjects. 
 
-% Output: - .mat file(s) 
-%   stores preprocessd data for all 30 subjects. Mat file is stored in a 
-%   subfolder 'processed' in parent of pathInput. e.g. if pathInput is 
-%   ~/data/imu/raw, processed data will be saved in ~/data/imu/processed
+% Output: 
+% pathOutput : str
+%   full path to processed folder containing .mat file(s) data for all 30 subjects.
+%   pathOutput points to subfolder 'processed' in parent of pathInput. e.g. if pathInput is 
+%   ~/data/imu/raw, pathOutput will be ~/data/imu/processed
 
 % MIT License
 %
@@ -225,7 +226,7 @@ if final_char ~= filesep
     pathInput = [pathInput, filesep];
 end
 indx = strfind(pathInput, filesep);
-pathOutput = [pathInput(1:indx(end-1)), 'processed data'];
+pathOutput = [pathInput(1:indx(end-1)), 'processed_data'];
 
 if ~exist(pathOutput, 'dir')
     mkdir(pathOutput)
